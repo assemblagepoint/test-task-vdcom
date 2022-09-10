@@ -1,0 +1,16 @@
+<th:block th:fragment="header" class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+    <header>
+        <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+            <span class="text-dark fs-3">Справочник книг</span>
+
+            <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+                <div th:replace="blocks/navigation :: navigation-panel"></div>
+            </nav>
+        </div>
+    </header>
+</th:block>
+
+<th:block th:fragment="navigation-panel" class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+    <a href="/" class="me-3 py-2 text-dark text-decoration-none text-hover">Главная</a>
+    <a href="/add" class="me-3 py-2 text-dark text-decoration-none">Добавить книгу</a>
+</th:block>

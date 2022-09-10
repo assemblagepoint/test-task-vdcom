@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Главная</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container py-3">
+    <div th:replace="blocks/navigation :: header"></div>
+    <th:block th:if="${errorMessage != null}">
+        <h6 th:utext="${errorMessage}" class="text-bg-danger p-2 rounded mt-2 mb-0"></h6>
+    </th:block>
+    <div class="card p-3">
+        <h4>Все записи</h4>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-primary">
+                <tr>
+                    <th>Автор</th>
+                    <th>Наименование</th>
+                    <th>Количество страниц</th>
+                    <th>Год издательства</th>
+                    <th>Стоимость</th>
+                    <th>Наличие</th>
+                    <th>Редактирование</th>
+                    <th>Удаление</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="book : ${books}">
+                    <tr>
+                        <td class="align-middle" th:utext="${book.getAuthor()}"></td>
+                        <td class="align-middle" th:utext="${book.getTitle()}"></td>
+                        <td class="align-middle" th:utext="${book.getNumberOfPages()}"></td>
+                        <td class="align-middle" th:utext="${book.getPublishingYear()}"></td>
+                        <td class="align-middle" th:utext="${book.getPrice()}"></td>
+                        <th:block th:if="${book.isInStock()}">
+                            <td class="align-middle">В наличии</td>
+                        </th:block>
+                        <th:block th:unless="${book.isInStock()}">
+                            <td class="align-middle">Отсутствует</td>
+                        </th:block>
+                        <td>
+                            <a th:href="'/edit/' + ${book.getId()}" class="btn btn-sm btn-outline-primary">Редактировать</a>
+                        </td>
+                        <td>
+                            <form th:action="'/delete/' + ${book.getId()}" method="post">
+                                <input type="submit" class="btn btn-sm btn-outline-primary" value="Удалить">
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
