@@ -31,4 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
 /out.txt
+/result.txt
+/task3/result.txt
+
